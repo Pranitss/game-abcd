@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphabet Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        #game-container {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        #input-field {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to the ABCD Alphabet Game!</h1>
+
+    <div id="game-container"></div>
+
+    <label for="input-field">Your guess:</label>
+    <input type="text" id="input-field">
+
+    <button onclick="checkGuess()">Submit Guess</button>
+
+    <script>
+        let currentLetter = 'A';
+
+        function updateGame() {
+            document.getElementById('game-container').innerText = `Current letter: ${currentLetter}`;
+        }
+
+        function checkGuess() {
+            const userInput = document.getElementById('input-field').value.toUpperCase().trim();
+
+            if (userInput === currentLetter) {
+                alert('Correct! Next letter.');
+                currentLetter = String.fromCharCode(currentLetter.charCodeAt(0) + 1);
+
+                if (currentLetter > 'Z') {
+                    alert('Congratulations! You\'ve reached the end of the alphabet.');
+                    resetGame();
+                } else {
+                    updateGame();
+                }
+            } else {
+                alert('Incorrect. Game Over.');
+                resetGame();
+            }
+        }
+
+        function resetGame() {
+            currentLetter = 'A';
+            updateGame();
+            document.getElementById('input-field').value = '';
+        }
+
+        // Initialize the game
+        updateGame();
+    </script>
+
+</body>
+</html>
